@@ -10,6 +10,9 @@ function errorMiddleware(error, req, res, next) {
     return new ValidationError(error).send(res);
   }
 
+  // eslint-disable-next-line no-console
+  console.error(error);
+
   return new ErrorBase().send(res);
 }
 

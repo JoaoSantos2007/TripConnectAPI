@@ -1,3 +1,4 @@
+import { callGPT } from '../config/openai.js';
 import NotFoundError from '../errors/NotFoundError.js';
 import DestinyModel from '../models/DestinyModel.js';
 
@@ -39,7 +40,13 @@ class DestinyController {
   static async createDestiny(req, res, next) {
     try {
       const data = req.body;
+
       const destiny = await DestinyModel.create(data);
+
+      if (!destiny.descricao) {
+        destiny.set('descricao', await callGPT(`Faça um resumo sobre ${data.nome} enfatizando o porque este lugar é incrível. Utilize uma linguagem informal e até 100 caracteres no máximo em cada parágrafo. Crie 2 parágrafos neste resumo.`));
+        await destiny.save();
+      }
 
       return res.status(201).json({
         success: true,

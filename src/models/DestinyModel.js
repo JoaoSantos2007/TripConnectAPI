@@ -46,13 +46,13 @@ DestinyModel.init({
     allowNull: false,
     validate: {
       len: {
-        args: [3, 20],
+        args: [3, 160],
         msg: 'O campo meta deve ser uma string de 3 a 160 caracteres!',
       },
     },
   },
   descricao: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(1000),
     allowNull: true,
   },
 }, {
