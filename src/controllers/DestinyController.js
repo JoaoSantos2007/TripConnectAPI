@@ -27,7 +27,7 @@ class DestinyController {
     try {
       const { id } = req.params;
       const destiny = await DestinyModel.findOne({
-        attributes: ['nome', 'foto1', 'foto2', 'meta', 'descricao'],
+        attributes: ['nome', 'foto1', 'foto2', 'meta', 'descricao', 'preco'],
         where: { id },
       });
 
